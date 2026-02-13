@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story | 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+</head>
+<body>
+    <canvas id="heartCanvas"></canvas>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="bar"></div>
+    </div>
+
+    <div class="slider">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <div class="glass-card">
+                <span class="emoji">💕</span>
+                <h1 class="neon-text">OUR LOVE STORY</h1>
+                <p class="subtitle">“Written by Destiny, Directed by Heart”</p>
+                <div class="footer-line">This Valentine, I celebrate Us ❤️</div>
+                <button onclick="next()">Start Our Journey</button>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">🌹</span>
+                <h2>One Day, Everything Changed…</h2>
+                <p>“That day, I didn’t know my life was about to change forever… A simple meeting, a simple smile… And my heart quietly made a decision.”</p>
+                <button onclick="next()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">💫</span>
+                <h2>When We Met for the First Time</h2>
+                <p>“That first look… That slightly awkward smile… And my heartbeat starting to race.”</p>
+                <button onclick="next()">Continue...</button>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">💬</span>
+                <h2>Our First Conversation</h2>
+                <p>“It started with a ‘Hi’… And I didn’t even realize when I started waiting for your ‘Goodnight’.”</p>
+                <button onclick="next()">Then...</button>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">❤️</span>
+                <h2>Maybe This Is Love…</h2>
+                <p>“When your voice starts to bring peace… When your worries become more important than mine… That’s when you realize… This isn’t just liking… this is love.”</p>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">🎁</span>
+                <h2>Our First Special Moment</h2>
+                <p>“That day was small… But it settled in my memories forever.”</p>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">😅</span>
+                <h2>Not Every Story Is Perfect</h2>
+                <p>“Yes, we fought too… But every fight brought us closer. Because staying apart is something neither of us likes.”</p>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">🥺</span>
+                <h2>Sorry & Hug</h2>
+                <p>“One ‘Sorry’ fixed everything… And one hug stitched my heart back together.”</p>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">💖</span>
+                <h2>Your Smile</h2>
+                <p>“Your smile lights up my world.”</p>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">💞</span>
+                <h2>Your Care</h2>
+                <p>“Your ‘Did you eat?’ is the sweetest question in my world.”</p>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">🌍</span>
+                <h2>Your Support</h2>
+                <p>“When everyone leaves… Your ‘I’m here’ makes everything okay.”</p>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">🌙</span>
+                <h2>3 AM Conversations</h2>
+                <p>“The world is asleep… And we are lost in our own little world.”</p>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">💭</span>
+                <h2>Our Tomorrow</h2>
+                <p>“One day we’ll travel together… One day we’ll build our own home… One day we’ll sit on rocking chairs and remember our story.”</p>
+                <button onclick="next()">Deep down...</button>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">💌</span>
+                <h2>A Letter To You</h2>
+                <p>“Dear Love, if life is a book… Then I want to write every chapter with you. Every happiness, every sorrow… only with you.”</p>
+                <button onclick="next()">Because...</button>
+            </div>
+        </div>
+
+        <!-- Slide 15 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">🎬</span>
+                <h2>Because…</h2>
+                <p>“You are not my habit… You are my need. You are not my time… You are my life.”</p>
+                <button onclick="next()">Final Question</button>
+            </div>
+        </div>
+
+        <!-- Slide 16 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">💍</span>
+                <h2>My Question…</h2>
+                <p class="big-text">Will You Be My Forever Valentine?</p>
+                <div class="btn-group">
+                    <button class="neon-btn" onclick="next()">YES! ❤️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 -->
+        <div class="slide">
+            <div class="glass-card">
+                <span class="emoji">🌹</span>
+                <h2>To Be Continued…</h2>
+                <p>“Our Love Story is not ending… It’s just getting started.”</p>
+                <p class="neon-text small">Forever & Always</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
