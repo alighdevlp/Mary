@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ داستان عاشقانه ما</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 30%, #2d0000 60%, #0a0a0a 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* پس‌زمینه ستاره‌ای */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff1a1a;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* قلب‌های شناور */
+        .floating-heart {
+            position: fixed;
+            font-size: 20px;
+            opacity: 0.15;
+            animation: floatHeart 12s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        /* المان‌های شناور تزئینی */
+        .floating-decor {
+            position: fixed;
+            font-size: 25px;
+            opacity: 0.12;
+            animation: floatDecor 15s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatDecor {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(15deg); }
+        }
+
+        /* کانتینر اصلی */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* مراحل */
+        .step {
+            display: none;
+            width: 100%;
+            max-width: 700px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* هدر */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #ff1a1a;
+            text-shadow: 0 0 20px rgba(255, 26, 26, 0.5), 0 0 40px rgba(255, 26, 26, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: #ff6666;
+            opacity: 0.8;
+        }
+
+        /* عنوان سکسی مرحله */
+        .step-title {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #ff1a1a;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(255, 26, 26, 0.4);
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        /* کارت سوال */
+        .question-card {
+            background: linear-gradient(145deg, rgba(20, 0, 0, 0.9), rgba(10, 0, 0, 0.95));
+            border: 2px solid #ff1a1a;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 0 30px rgba(255, 26, 26, 0.15), inset 0 0 30px rgba(255, 26, 26, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 26, 26, 0.08) 0%, transparent 70%);
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .option-btn {
+            background: linear-gradient(135deg, rgba(255, 26, 26, 0.2), rgba(153, 0, 0, 0.3));
+            border: 2px solid #ff1a1a;
+            color: #fff;
+            padding: 14px 35px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn:hover {
+            background: linear-gradient(135deg, #ff1a1a, #990000);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 26, 26, 0.4);
+        }
+
+        .option-btn.selected {
+            background: linear-gradient(135deg, #ff1a1a, #990000);
+            box-shadow: 0 0 30px rgba(255, 26, 26, 0.6);
+        }
+
+        .option-btn.correct-answer {
+            background: linear-gradient(135deg, #00aa00, #006600) !important;
+            border-color: #00ff00 !important;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5) !important;
+        }
+
+        .option-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* دکمه ایموجی چشم ابرو بالا */
+        .emoji-btn {
+            background: linear-gradient(135deg, rgba(255, 26, 26, 0.15), rgba(153, 0, 0, 0.2));
+            border: 2px solid rgba(255, 26, 26, 0.5);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emoji-btn:hover {
+            background: linear-gradient(135deg, rgba(255, 26, 26, 0.3), rgba(153, 0, 0, 0.4));
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 26, 26, 0.3);
+        }
+
+        /* پیام جواب */
+        .answer-message {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 15px;
+            background: rgba(255, 26, 26, 0.1);
+            border-right: 4px solid #ff1a1a;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .answer-message.show {
+            display: block;
+        }
+
+        /* پیام چیییی نشنیدم */
+        .nashnidem-message {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255, 26, 26, 0.15), rgba(153, 0, 0, 0.2));
+            border: 2px dashed #ff1a1a;
+            font-size: 1.3rem;
+            line-height: 2;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .nashnidem-message.show {
+            display: block;
+        }
+
+        .nashnidem-message .nashnidem-text {
+            font-size: 1.4rem;
+            color: #ff9999;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .nashnidem-message .nashnidem-emoji {
+            font-size: 3rem;
+            margin: 10px 0;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* دکمه گوه خوردممممم */
+        .goh-btn {
+            background: linear-gradient(135deg, #ff1a1a, #990000);
+            border: none;
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 26, 26, 0.4);
+            animation: fadeInUp 0.5s ease;
+            font-weight: bold;
+        }
+
+        .goh-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 26, 26, 0.6);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* دکمه بعدی عاشقانه */
+        .next-btn {
+            display: none;
+            background: linear-gradient(135deg, #ff1a1a, #990000);
+            border: none;
+            color: #fff;
+            padding: 16px 50px;
+            border-radius: 50px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.15rem;
+            cursor: pointer;
+            margin: 30px auto 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 26, 26, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease;
+            text-align: center;
+        }
+
+        .next-btn.show {
+            display: block;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 26, 26, 0.6);
+        }
+
+        /* تایم‌لاین */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .timeline::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .timeline::-webkit-scrollbar-track {
+            background: rgba(255, 26, 26, 0.1);
+            border-radius: 3px;
+        }
+
+        .timeline::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #ff1a1a, #990000);
+            border-radius: 3px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #ff1a1a, #990000, #ff1a1a);
+            box-shadow: 0 0 10px rgba(255, 26, 26, 0.5);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .timeline-dot {
+            width: 18px;
+            height: 18px;
+            background: #ff1a1a;
+            border-radius: 50%;
+            position: absolute;
+            right: 22px;
+            top: 5px;
+            box-shadow: 0 0 15px rgba(255, 26, 26, 0.8);
+            z-index: 2;
+        }
+
+        .timeline-content {
+            background: linear-gradient(145deg, rgba(30, 0, 0, 0.9), rgba(15, 0, 0, 0.95));
+            border: 1px solid rgba(255, 26, 26, 0.3);
+            border-radius: 15px;
+            padding: 18px 22px;
+            margin-right: 55px;
+            flex: 1;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: #ff1a1a;
+            box-shadow: 0 5px 30px rgba(255, 26, 26, 0.2);
+        }
+
+        .timeline-date {
+            color: #ff6666;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .timeline-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #eee;
+        }
+
+        /* کارت حمایت */
+        .support-card {
+            background: linear-gradient(145deg, rgba(20, 0, 0, 0.95), rgba(5, 0, 0, 0.98));
+            border: 2px solid #ff1a1a;
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 26, 26, 0.2), inset 0 0 50px rgba(255, 26, 26, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-card h2 {
+            font-size: 1.8rem;
+            color: #ff1a1a;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(255, 26, 26, 0.4);
+        }
+
+        .support-card p {
+            font-size: 1.15rem;
+            line-height: 2.2;
+            color: #ddd;
+            margin-bottom: 12px;
+        }
+
+        .support-card .highlight {
+            color: #ff1a1a;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 26, 26, 0.3);
+        }
+
+        /* کارت نهایی (شیطونی) */
+        .final-card {
+            background: linear-gradient(145deg, #1a0000, #0a0000);
+            border: 3px solid #ff1a1a;
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(255, 26, 26, 0.3), inset 0 0 60px rgba(255, 26, 26, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-card .emoji-bg {
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            animation: floatEmoji 6s infinite ease-in-out;
+        }
+
+        .final-card .emoji-bg:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .final-card .emoji-bg:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .final-card .emoji-bg:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 2s; }
+        .final-card .emoji-bg:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 3s; }
+
+        @keyframes floatEmoji {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .final-card h2 {
+            font-size: 2rem;
+            color: #ff1a1a;
+            margin-bottom: 25px;
+            text-shadow: 0 0 25px rgba(255, 26, 26, 0.5);
+        }
+
+        .final-card .naughty-text {
+            font-size: 1.3rem;
+            line-height: 2.2;
+            color: #ffcccc;
+        }
+
+        .final-card .naughty-emojis {
+            font-size: 3rem;
+            margin: 25px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .final-btn {
+            background: linear-gradient(135deg, #ff1a1a, #990000);
+            border: none;
+            color: #fff;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 26, 26, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 26, 26, 0.6);
+        }
+
+        /* مدال نهایی */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a0000, #0a0000);
+            border: 3px solid #ff1a1a;
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 80px rgba(255, 26, 26, 0.4), inset 0 0 50px rgba(255, 26, 26, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: modalIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.7) translateY(50px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 26, 26, 0.1) 0%, transparent 70%);
+            animation: pulse 3s infinite;
+        }
+
+        .modal-hearts {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+
+        .modal-content h2 {
+            font-size: 2.2rem;
+            color: #ff1a1a;
+            margin-bottom: 25px;
+            text-shadow: 0 0 30px rgba(255, 26, 26, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-text {
+            font-size: 1.3rem;
+            line-height: 2.4;
+            color: #ffcccc;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-text .naughty {
+            color: #ff1a1a;
+            font-weight: bold;
+            font-size: 1.4rem;
+            text-shadow: 0 0 15px rgba(255, 26, 26, 0.4);
+        }
+
+        .modal-emojis {
+            font-size: 3.5rem;
+            margin: 25px 0;
+            animation: bounce 1.5s infinite;
+        }
+
+        .modal-close {
+            background: linear-gradient(135deg, #ff1a1a, #990000);
+            border: none;
+            color: #fff;
+            padding: 15px 45px;
+            border-radius: 50px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 26, 26, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 26, 26, 0.6);
+        }
+
+        /* افکت قلب پراکنده */
+        .heart-explosion {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .heart-particle {
+            position: absolute;
+            font-size: 20px;
+            animation: heartFly 2s ease-out forwards;
+        }
+
+        @keyframes heartFly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* کنترل موزیک */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 26, 26, 0.2);
+            border: 2px solid #ff1a1a;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .music-control:hover {
+            background: rgba(255, 26, 26, 0.4);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 26, 26, 0.5);
+        }
+
+        .music-control.playing {
+            animation: musicPulse 2s infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 26, 26, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(255, 26, 26, 0.6); }
+        }
+
+        /* اسکرول بار سفارشی */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #ff1a1a, #990000);
+            border-radius: 4px;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .step-title { font-size: 1.3rem; }
+            .question-text { font-size: 1.2rem; }
+            .options { flex-direction: column; }
+            .option-btn { width: 100%; text-align: center; }
+            .timeline-content { margin-right: 45px; }
+            .final-card { padding: 30px 20px; }
+            .final-card h2 { font-size: 1.5rem; }
+            .modal-content { padding: 35px 25px; }
+            .modal-content h2 { font-size: 1.7rem; }
+            .nashnidem-message .nashnidem-emoji { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- کنترل موزیک -->
+    <div class="music-control" id="musicBtn" onclick="toggleMusic()">
+        🎵
+    </div>
+
+    <!-- موزیک پس‌زمینه -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- پس‌زمینه ستاره‌ای -->
+    <div class="stars" id="stars"></div>
+
+    <!-- قلب‌های شناور -->
+    <div class="floating-heart" style="left: 15%; animation-delay: 0s;">❤️</div>
+    <div class="floating-heart" style="left: 35%; animation-delay: 2s;">❤️</div>
+    <div class="floating-heart" style="left: 55%; animation-delay: 4s;">❤️</div>
+    <div class="floating-heart" style="left: 75%; animation-delay: 6s;">❤️</div>
+    <div class="floating-heart" style="left: 90%; animation-delay: 8s;">❤️</div>
+
+    <!-- المان‌های تزئینی -->
+    <div class="floating-decor" style="top: 15%; left: 8%;">✨</div>
+    <div class="floating-decor" style="top: 40%; right: 10%; animation-delay: 3s;">💫</div>
+    <div class="floating-decor" style="top: 65%; left: 12%; animation-delay: 6s;">🔥</div>
+    <div class="floating-decor" style="top: 85%; right: 8%; animation-delay: 9s;">💋</div>
+
+    <div class="container">
+
+        <!-- مرحله ۰: هدر و شروع -->
+        <div class="step active" id="step-0">
+            <div class="header">
+                <h1>❤️ داستان عاشقانه ما ❤️</h1>
+                <p class="subtitle">یه سفر به دنیای قلبمون...</p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <p style="font-size: 1.2rem; color: #ff9999; line-height: 2; margin-bottom: 30px;">
+                    آماده‌ای بریم تو دنیای عشقمون؟<br>
+                    یه سفر پر از احساس و خاطره...
+                </p>
+                <button class="next-btn show" onclick="nextStep()" style="display: inline-block;">
+                    بزن بریم عشقم، دلم برات تنگ شده ❤️🔥
+                </button>
+            </div>
+        </div>
+
+        <!-- مرحله ۱: سوال اول -->
+        <div class="step" id="step-1">
+            <div class="step-title">💋 اولین لمس احساس 💋</div>
+            <div class="question-card">
+                <div class="question-text">
+                    عاشقمی؟ اونقدر که وقتی نمی‌بینمت، بدنت می‌سوزه برام؟
+                </div>
+                <div class="options">
+                    <button class="option-btn" onclick="answerQuestion(1, 'yes', this)">آره دیوونتم، هر شب تو خوابم می‌بینمت ❤️🔥</button>
+                    <button class="emoji-btn" onclick="answerQuestion(1, 'naz', this)">🙄</button>
+                </div>
+                <div class="answer-message" id="answer-1"></div>
+                <div class="nashnidem-message" id="nashnidem-1">
+                    <div class="nashnidem-emoji">🙄🙄🙄</div>
+                    <div class="nashnidem-text">چییییی؟ نشنیدمممم؟؟؟</div>
+                    <button class="goh-btn" onclick="fixAnswer(1)">گوه خوردممممم جون دلممم 😭❤️</button>
+                </div>
+            </div>
+            <button class="next-btn" id="next-1" onclick="nextStep()">
+                بذار بریم جلوتر، هنوز خیلی چیزا هست که بگم 💋
+            </button>
+        </div>
+
+        <!-- مرحله ۲: سوال دوم -->
+        <div class="step" id="step-2">
+            <div class="step-title">💍 رویای شبانه‌مون 💍</div>
+            <div class="question-card">
+                <div class="question-text">
+                    با من ازدواج می‌کنی؟ تا هر شب بخوابی تو بغلم و صبح بیدار شی با بوسه من؟
+                </div>
+                <div class="options">
+                    <button class="option-btn" onclick="answerQuestion(2, 'yes', this)">صد در صد، همین الان حلقه رو بنداز دستم 💍❤️</button>
+                    <button class="emoji-btn" onclick="answerQuestion(2, 'naz', this)">🙄</button>
+                </div>
+                <div class="answer-message" id="answer-2"></div>
+                <div class="nashnidem-message" id="nashnidem-2">
+                    <div class="nashnidem-emoji">🙄🙄🙄</div>
+                    <div class="nashnidem-text">چییییی؟ نشنیدمممم؟؟؟</div>
+                    <button class="goh-btn" onclick="fixAnswer(2)">گوه خوردممممم جون دلممم 😭❤️</button>
+                </div>
+            </div>
+            <button class="next-btn" id="next-2" onclick="nextStep()">
+                بیا بریم، یه سورپرایز دیگه دارم برات 😏
+            </button>
+        </div>
+
+        <!-- مرحله ۳: سوال سوم -->
+        <div class="step" id="step-3">
+            <div class="step-title">🔥 تا ابدیت من 🔥</div>
+            <div class="question-card">
+                <div class="question-text">
+                    تا آخر عمر کنارمی می‌مونی؟ حتی وقتی پیر شدیم ولی هنوز دلت برام می‌تپه؟
+                </div>
+                <div class="options">
+                    <button class="option-btn" onclick="answerQuestion(3, 'yes', this)">همیشه و تا ابد، حتی وقتی موهام سفید شد 🤝❤️</button>
+                    <button class="emoji-btn" onclick="answerQuestion(3, 'naz', this)">🙄</button>
+                </div>
+                <div class="answer-message" id="answer-3"></div>
+                <div class="nashnidem-message" id="nashnidem-3">
+                    <div class="nashnidem-emoji">🙄🙄🙄</div>
+                    <div class="nashnidem-text">چییییی؟ نشنیدمممم؟؟؟</div>
+                    <button class="goh-btn" onclick="fixAnswer(3)">گوه خوردممممم جون دلممم 😭❤️</button>
+                </div>
+            </div>
+            <button class="next-btn" id="next-3" onclick="nextStep()">
+                هنوز تموم نشده عشقم، بیا جلوتر 💋
+            </button>
+        </div>
+
+        <!-- مرحله ۴: سوال چهارم -->
+        <div class="step" id="step-4">
+            <div class="step-title">✨ انتخاب بی‌نهایت ✨</div>
+            <div class="question-card">
+                <div class="question-text">
+                    اگه دوباره متولد بشی، بازم منو انتخاب می‌کنی؟
+                </div>
+                <div class="options">
+                    <button class="option-btn" onclick="answerQuestion(4, 'yes', this)">هزار باره دیگهم، هر دفعه عاشق‌تر ✨❤️</button>
+                    <button class="emoji-btn" onclick="answerQuestion(4, 'naz', this)">🙄</button>
+                </div>
+                <div class="answer-message" id="answer-4"></div>
+                <div class="nashnidem-message" id="nashnidem-4">
+                    <div class="nashnidem-emoji">🙄🙄🙄</div>
+                    <div class="nashnidem-text">چییییی؟ نشنیدمممم؟؟؟</div>
+                    <button class="goh-btn" onclick="fixAnswer(4)">گوه خوردممممم جون دلممم 😭❤️</button>
+                </div>
+            </div>
+            <button class="next-btn" id="next-4" onclick="nextStep()">
+                حالا بذار یه چیزی نشونت بدم که قلبت وایسه ❤️
+            </button>
+        </div>
+
+        <!-- مرحله ۵: تایم‌لاین -->
+        <div class="step" id="step-5">
+            <div class="step-title">❤️ خاطراتیمون که هیچ‌وقت فراموش نمی‌کنم ❤️</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">📅 لحظه آشنایی</div>
+                        <div class="timeline-text">
+                            ون روز نفهمیدم چی شد... فهمیدم عاشق شدم
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">💬 اولین حرف</div>
+                        <div class="timeline-text">
+                            وقتی صداتو شنیدم، قلبم یه جور دیگه شروع به تپیدن کرد. انگار یه ملودی آشنا بود...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">🗝️ اولین صداقت</div>
+                        <div class="timeline-text">
+                            اولین باری که دردمونو باهم تقسیم کردیم، فهمیدم تو فقط یه عشق نیستی... تو رفیقم، خونم، همه‌چیم ❤️
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">❤️ عاشق شدن</div>
+                        <div class="timeline-text">
+                            فهمیدم عاشقتم وقتی که حتی فکر نبودنت هم قلبمو می‌شکوند...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">🤝 کنار هم بودن</div>
+                        <div class="timeline-text">
+                            هر روزی که باهات هستم، بهترین روز زندگیمه . حتی روزای سختش...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">🌟 آینده‌مون</div>
+                        <div class="timeline-text">
+                            می‌خوام بقیه عمرمو با تو بگذرونم. هر روز، هر شب، هر لحظه...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="next-btn show" onclick="nextStep()" style="margin-top: 25px;">
+                یه چیز مهم‌تر هست که باید بگم... ❤️
+            </button>
+        </div>
+
+        <!-- مرحله ۶: کارت حمایت -->
+        <div class="step" id="step-6">
+            <div class="step-title">🖤 از ته دل، فقط برای تو 🖤</div>
+            <div class="support-card">
+                <h2>یه حرف از ته دل</h2>
+                <p>
+                    می‌دونم گاهی زندگی به آدم <span class="highlight">فشار</span> میاره...
+                </p>
+                <p>
+                    می‌دونم گاهی <span class="highlight">سخت</span> می‌گذره...
+                </p>
+                <p>
+                    می‌دونم گاهی <span class="highlight">خسته</span> می‌شی...
+                </p>
+                <p>
+                    ولی یادت باشه، <span class="highlight">ما همیشه همو داریم</span> 🤝
+                </p>
+                <p>
+                    هر مشکلی که پیش بیاد، <span class="highlight">باهم</span> حلش می‌کنیم 💪
+                </p>
+                <p>
+                    هر سختی که باشه، <span class="highlight">باهم</span> تحملش می‌کنیم ❤️
+                </p>
+                <p>
+                    چون <span class="highlight">عشقمون</span> قوی‌تر از هر چیزیه 🔥
+                </p>
+            </div>
+            <button class="next-btn show" onclick="nextStep()" style="margin-top: 25px;">
+                حالا نوبت مهم‌ترین قسمته... 😈
+            </button>
+        </div>
+
+        <!-- مرحله ۷: کارت نهایی -->
+        <div class="step" id="step-7">
+            <div class="step-title">😈 هر روز مال ماست 😈</div>
+            <div class="final-card">
+                <div class="emoji-bg">😈</div>
+                <div class="emoji-bg">💋</div>
+                <div class="emoji-bg">🔥</div>
+                <div class="emoji-bg">😏</div>
+
+                <h2>خب حالا که همه چی رو گفتیم...</h2>
+
+                <div class="naughty-text">
+                    <p>پس چرا همین حالا نمیایی سرجات بشینی؟ 😈</p>
+                    <p>تا یکارایی <span class="highlight">صورت</span> بدیم 🔥😈</p>
+                </div>
+
+                <div class="naughty-emojis">
+                    💋😈🔥💋😈🔥
+                </div>
+
+                <button class="final-btn" onclick="showFinalModal()">
+                    بدو بریم که بدجور دلم خواست 😈💋
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مدال نهایی -->
+    <div class="modal-overlay" id="finalModal">
+        <div class="modal-content">
+            <div class="modal-hearts">❤️🔥💋</div>
+            <h2>عشق من، دیوونه من</h2>
+            <div class="modal-text">
+                <p>
+                    می‌دونی چقدر <span class="naughty">دلم برات تنگ شده</span>؟
+                </p>
+                <p>
+                    هر ثانیه‌ای که <span class="naughty">نمی‌بینمت</span>،
+                </p>
+                <p>
+                    بدنم <span class="naughty">می‌سوزه</span> برات 🔥
+                </p>
+                <p>
+                    می‌خوام <span class="naughty">لمست کنم</span>،
+                </p>
+                <p>
+                    <span class="naughty">بوسمت کنم</span>،
+                </p>
+                <p>
+                    و <span class="naughty">هیچ‌کجا نری</span> 💋
+                </p>
+                <p>
+                    هر روز تا ابد <span class="naughty">فقط مال منی</span> 😈
+                </p>
+                <p>
+                    و من <span class="naughty">هیچ‌جا نمی‌ذارمت بری</span> 🔥
+                </p>
+            </div>
+            <div class="modal-emojis">
+                💋😈🔥❤️😈💋
+            </div>
+            <button class="modal-close" onclick="closeModal()">
+                بشین سرجات عمر من 💋😈
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 8;
+
+        // ساخت ستاره‌های پس‌زمینه
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // رفتن به مرحله بعد
+        function nextStep() {
+            document.getElementById('step-' + currentStep).classList.remove('active');
+            currentStep++;
+            if (currentStep < totalSteps) {
+                document.getElementById('step-' + currentStep).classList.add('active');
+            }
+        }
+
+        // پاسخ به سوالات
+        const answers = {
+            1: 'منم دیوونتم! ❤️🔥 هر ثانیه که باهاتم، قلبم سریع‌تر می‌زنه...',
+            2: 'منم صد در صد! 💍❤️ می‌خوام بقیه عمرمو با تو بگذرونم...',
+            3: 'منم همیشه کنارت می‌مونم! 🤝❤️ حتی اگه دنیا بهم بریزه...',
+            4: 'منم هزار باره! ✨❤️ هر بار، هر زمان، فقط تو...'
+        };
+
+        const afrinTexts = {
+            1: 'آفرین عشقممم 😍❤️ ',
+            2: 'آفرینننن عزیزممم 💍🔥 ',
+            3: 'آفرین عشق مننن 🤝❤️ ',
+            4: 'آفرینننن دیوونممم ✨🔥 '
+        };
+
+        function answerQuestion(num, choice, btn) {
+            const card = btn.closest('.question-card');
+            const buttons = card.querySelectorAll('.option-btn, .emoji-btn');
+            const messageDiv = document.getElementById('answer-' + num);
+            const nashnidemDiv = document.getElementById('nashnidem-' + num);
+            const nextBtn = document.getElementById('next-' + num);
+
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.style.opacity = '0.5';
+            });
+
+            btn.style.opacity = '1';
+            btn.classList.add('selected');
+
+            if (choice === 'yes') {
+                btn.classList.add('correct-answer');
+                createHeartExplosion(btn);
+                messageDiv.textContent = answers[num];
+                messageDiv.classList.add('show');
+                setTimeout(() => {
+                    nextBtn.classList.add('show');
+                }, 800);
+            } else {
+                // جواب ناز - نشنیدم
+                nashnidemDiv.classList.add('show');
+            }
+        }
+
+        // فیکس کردن جواب (وقتی گوه خوردم رو زد)
+        function fixAnswer(num) {
+            const nashnidemDiv = document.getElementById('nashnidem-' + num);
+            const messageDiv = document.getElementById('answer-' + num);
+            const nextBtn = document.getElementById('next-' + num);
+
+            nashnidemDiv.classList.remove('show');
+
+            // پیام گزینه اول + آفرین
+            messageDiv.textContent = afrinTexts[num] + answers[num];
+            messageDiv.classList.add('show');
+
+            createHeartExplosion(document.querySelector('#nashnidem-' + num + ' .goh-btn'));
+
+            setTimeout(() => {
+                nextBtn.classList.add('show');
+            }, 800);
+        }
+
+        // افکت قلب پراکنده
+        function createHeartExplosion(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.textContent = ['❤️', '💋', '🔥', '✨'][Math.floor(Math.random() * 4)];
+                heart.style.left = centerX + 'px';
+                heart.style.top = centerY + 'px';
+
+                const angle = (Math.PI * 2 * i) / 15;
+                const distance = 100 + Math.random() * 150;
+                heart.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                heart.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 2000);
+            }
+        }
+
+        // نمایش مدال نهایی
+        function showFinalModal() {
+            const modal = document.getElementById('finalModal');
+            modal.classList.add('show');
+            createHeartExplosion(document.querySelector('.final-btn'));
+
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-particle';
+                    heart.textContent = ['❤️', '💋', '🔥', '😈'][Math.floor(Math.random() * 4)];
+                    heart.style.left = Math.random() * window.innerWidth + 'px';
+                    heart.style.top = window.innerHeight + 'px';
+                    heart.style.setProperty('--tx', (Math.random() - 0.5) * 400 + 'px');
+                    heart.style.setProperty('--ty', -Math.random() * 500 - 200 + 'px');
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 2000);
+                }, i * 100);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('finalModal').classList.remove('show');
+        }
+
+        // کنترل موزیک
+        let musicPlaying = false;
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+                musicBtn.classList.remove('playing');
+            } else {
+                bgMusic.play().catch(e => console.log('Music play failed:', e));
+                musicBtn.textContent = '🎵';
+                musicBtn.classList.add('playing');
+            }
+            musicPlaying = !musicPlaying;
+        }
+
+        // شروع خودکار موزیک با اولین کلیک
+        document.addEventListener('click', function startMusic() {
+            if (!musicPlaying) {
+                toggleMusic();
+            }
+            document.removeEventListener('click', startMusic);
+        }, { once: true });
+
+        // بستن مدال با کلیک روی overlay
+        document.getElementById('finalModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
